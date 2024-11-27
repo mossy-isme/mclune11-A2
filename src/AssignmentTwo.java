@@ -8,5 +8,5 @@
  * @author mosscluney
  */
 public class AssignmentTwo {
-
+    
 }
