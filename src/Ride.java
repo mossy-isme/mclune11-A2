@@ -374,11 +374,11 @@ public class Ride implements RideInterface {
             if (rideHistoryFile.createNewFile()) {
                 System.out.println("Success: File created:" + rideHistoryFile.getName());
             } 
-            FileWriter rideHistoryWriter = new FileWriter("rideHistory.csv");
-            for (Visitor visitor: visitorHistory) {
-                rideHistoryWriter.write(visitor.getID()+","+visitor.getName()+","+visitor.getDOB()+","+visitor.isVIP()+","+visitor.getTicketExpiry()+"\n");
+            try (FileWriter rideHistoryWriter = new FileWriter("rideHistory.csv")) {
+                for (Visitor visitor: visitorHistory) {
+                    rideHistoryWriter.write(visitor.getID()+","+visitor.getName()+","+visitor.getDOB()+","+visitor.isVIP()+","+visitor.getTicketExpiry()+"\n");
+                }
             }
-            rideHistoryWriter.close();
             System.out.println("Success: Vistor history wrote to file.");
         } catch (IOException e) {
             System.out.println("An error has occurred.");
