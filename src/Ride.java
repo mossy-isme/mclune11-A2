@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -11,7 +12,8 @@ import java.util.LinkedList;
  * Represents a ride in an amusement park.
  */
 public class Ride implements RideInterface {
-
+    private int maxRider;
+    private int numOfCycles = 0;
     private String name;
     private Boolean isOperating;
     private Employee employeeOnShift;
@@ -25,20 +27,72 @@ public class Ride implements RideInterface {
     }
 
     /**
-     * Constructs a Ride object with the given name, operating status, and
-     * employee on shift.
+     * Constructs a Ride object with the specified parameters.
      *
+     * @param maxRider The maximum number of riders allowed on the ride
+     * @param numOfCycles The number of cycles the ride has completed
      * @param name The name of the ride
-     * @param isOperating The operating status of the ride
-     * @param employeeOnShift The employee currently on shift for the ride
+     * @param isOperating The status of the ride (operating or not)
+     * @param employeeOnShift The employee currently assigned to the ride
+     * @param queue The queue of visitors waiting to ride
+     * @param visitorHistory The history of visitors who have ridden the ride
      */
-    public Ride(String name, Boolean isOperating, Employee employeeOnShift) {
-        this.name = name;
-        this.isOperating = isOperating;
-        this.employeeOnShift = employeeOnShift;
+    public Ride(int maxRider, int numOfCycles, String name, Boolean isOperating, Employee employeeOnShift) {
+        if (maxRider >= 1) {
+            if (numOfCycles >= 0) {
+                this.maxRider = maxRider;
+                this.numOfCycles = numOfCycles;
+                this.name = name;
+                this.isOperating = isOperating;
+                this.employeeOnShift = employeeOnShift;
+                System.err.println("Success: Ride successfully created.");
+            }
+        } else {
+            System.err.println("Error: Failed to create ride, maxRider is less than 1.");
+        }
     }
 
+
+
     //GETTER and SETTERS
+
+    /**
+     * Retrieves the maximum number of riders allowed.
+     *
+     * @return The maximum number of riders allowed.
+     */
+    public int getMaxRider() {
+        return maxRider;
+    }
+
+    /**
+     * Sets the maximum number of riders allowed on a vehicle.
+     *
+     * @param maxRider The maximum number of riders allowed
+     */
+    public void setMaxRider(int maxRider) {
+        this.maxRider = maxRider;
+    }
+    
+
+    /**
+     * Returns the number of cycles.
+     *
+     * @return The number of cycles.
+     */
+    public int getNumOfCycles() {
+        return numOfCycles;
+    }
+
+    /**
+     * Sets the number of cycles for a specific operation.
+     *
+     * @param numOfCycles The number of cycles to set
+     */
+    public void setNumOfCycles(int numOfCycles) {
+        this.numOfCycles = numOfCycles;
+    }
+
     /**
      * Returns the name associated with this object.
      *
@@ -257,8 +311,24 @@ public class Ride implements RideInterface {
         System.out.println("\nRide history printed successfully.");
     }
 
+    /**
+     * Sorts the visitor history list using a custom VisitorComparator.
+     * If the visitor history list is empty or null, a message is printed and the method returns.
+     */
+    public void sortVisitorHistory() {
+        if (visitorHistory == null || visitorHistory.isEmpty()) {
+            System.out.println("Info: No visitors to sort in the history.");
+            return;
+        }
+
+        Collections.sort(visitorHistory, new VisitorComparator());
+        System.out.println("Visitor history sorted successfully.");
+    }
+
+
     @Override
     public void runOneCycle() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
 }
