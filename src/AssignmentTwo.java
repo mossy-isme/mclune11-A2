@@ -39,9 +39,8 @@ public class AssignmentTwo {
     }
     public void partSeven(){
     }
-    
+
     public static void main(String[] args) {
-        System.out.println("hih");
         AssignmentTwo assignmentTwo = new AssignmentTwo();
         assignmentTwo.partThree();
     }
