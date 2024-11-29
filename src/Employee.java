@@ -12,7 +12,7 @@ import java.util.UUID;
  */
 public class Employee extends Person {
 
-    UUID ID;
+    UUID ID = UUID.randomUUID();;
     private String name;
     private String DOB;
     private String roleTitle;
