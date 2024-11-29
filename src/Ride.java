@@ -1,8 +1,12 @@
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 /**
  *
@@ -356,4 +360,47 @@ public class Ride implements RideInterface {
         this.numOfCycles++;
         System.out.println("Success: Cycle completed successfully. " + processedRiders + " visitors enjoyed the ride.");
     }
+
+    /**
+     * Exports the ride history of visitors to a CSV file named "rideHistory.csv".
+     * The file will contain visitor details such as ID, name, date of birth, VIP status, and ticket expiry.
+     * If the file does not exist, it will be created.
+     * Any IOException that occurs during the file writing process will be caught and printed to the console.
+     */
+    @SuppressWarnings("CallToPrintStackTrace")
+    public void exportRideHistory() {
+        try {
+            File rideHistoryFile = new File("rideHistory.csv");
+            if (rideHistoryFile.createNewFile()) {
+                System.out.println("Success: File created:" + rideHistoryFile.getName());
+            } 
+            FileWriter rideHistoryWriter = new FileWriter("rideHistory.csv");
+            for (Visitor visitor: visitorHistory) {
+                rideHistoryWriter.write(visitor.getID()+","+visitor.getName()+","+visitor.getDOB()+","+visitor.isVIP()+","+visitor.getTicketExpiry()+"\n");
+            }
+            rideHistoryWriter.close();
+            System.out.println("Success: Vistor history wrote to file.");
+        } catch (IOException e) {
+            System.out.println("An error has occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    @SuppressWarnings("CallToPrintStackTrace")
+    public void importRideHistory() {
+        try {
+            File rideHistoryFile = new File("rideHistory.csv");
+            Scanner rideHistoryScanner = new Scanner(rideHistoryFile);
+            while (rideHistoryScanner.hasNextLine()) {
+                String data = rideHistoryScanner.nextLine();
+                this.addVisitorToHistory(new Visitor(data.split(",")[0],data.split(",")[1],Boolean.parseBoolean(data.split(",")[2]),data.split(",")[3]));
+            }
+            rideHistoryScanner.close();
+            System.out.println("Success: Vistor history wrote to file.");
+        } catch (IOException e) {
+            System.out.println("An error has occurred.");
+            e.printStackTrace();
+        }
+    }
+
 }

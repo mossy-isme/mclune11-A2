@@ -11,7 +11,6 @@ import java.util.UUID;
  * status and ticket expiry information.
  */
 public class Visitor extends Person {
-
     UUID ID = UUID.randomUUID();
     private String name;
     private String DOB;
@@ -115,4 +114,5 @@ public class Visitor extends Person {
     public void setTicketExpiry(String ticketExpiry) {
         this.ticketExpiry = ticketExpiry;
     }
+
 }
