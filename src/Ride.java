@@ -17,7 +17,6 @@ public class Ride implements RideInterface {
     private Employee employeeOnShift;
     ArrayList<Visitor> queue = new ArrayList<>();
     LinkedList<Visitor> visitorHistory = new LinkedList<>();
-    Iterator<Visitor> visitorHistoryIterator = visitorHistory.iterator();
 
     /**
      * Constructs a new Ride object.
@@ -243,7 +242,9 @@ public class Ride implements RideInterface {
 
         System.out.println("Ride history for " + this.getName() + ":");
 
-        // Using an iterator to traverse the visitor history
+        // Using a fresh iterator each time to avoid issues
+        Iterator<Visitor> visitorHistoryIterator = visitorHistory.iterator();
+
         while (visitorHistoryIterator.hasNext()) {
             Visitor visitor = visitorHistoryIterator.next();
             if (visitor != null) {

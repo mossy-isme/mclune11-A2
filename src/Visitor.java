@@ -12,7 +12,7 @@ import java.util.UUID;
  */
 public class Visitor extends Person {
 
-    UUID ID;
+    UUID ID = UUID.randomUUID();
     private String name;
     private String DOB;
     private boolean isVIP;
