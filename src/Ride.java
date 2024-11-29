@@ -12,7 +12,7 @@ public class Ride implements RideInterface {
     private String name;
     private Boolean isOperating;
     private Employee employeeOnShift;
-    private ArrayList<Visitor> queue = new ArrayList<>();
+    ArrayList<Visitor> queue = new ArrayList<>();
      
     
         /**
