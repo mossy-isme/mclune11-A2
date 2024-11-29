@@ -136,11 +136,20 @@ public class AssignmentTwo {
         theWizardOfOz.exportRideHistory();
     }
     public void partSeven(){
+        Employee rideOperatorOne = new Employee("John Geoffery","19/11/1999","Ride Operator", "3/5/2012");
+        
+        Ride theWizardOfOz = new Ride(4, "The Wizard Of Oz", true, rideOperatorOne);
+
+        theWizardOfOz.importRideHistory();
+
+        theWizardOfOz.numberOfVisitors();
+
+        theWizardOfOz.printRideHistory();
     }
 
     public static void main(String[] args) {
         AssignmentTwo assignmentTwo = new AssignmentTwo();
-        assignmentTwo.partSix();
+        assignmentTwo.partSeven();
     }
     
 }

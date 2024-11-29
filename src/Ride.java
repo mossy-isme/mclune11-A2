@@ -386,17 +386,23 @@ public class Ride implements RideInterface {
         }
     }
 
+    /**
+     * Imports ride history data from a CSV file and adds visitors to the history.
+     * Each line in the CSV file should be in the format: "visitorName,visitorAge,visitorStatus,rideName".
+     * 
+     * @throws IOException if an error occurs while reading the file
+     */
     @SuppressWarnings("CallToPrintStackTrace")
     public void importRideHistory() {
         try {
             File rideHistoryFile = new File("rideHistory.csv");
-            Scanner rideHistoryScanner = new Scanner(rideHistoryFile);
-            while (rideHistoryScanner.hasNextLine()) {
-                String data = rideHistoryScanner.nextLine();
-                this.addVisitorToHistory(new Visitor(data.split(",")[0],data.split(",")[1],Boolean.parseBoolean(data.split(",")[2]),data.split(",")[3]));
+            try (Scanner rideHistoryScanner = new Scanner(rideHistoryFile)) {
+                while (rideHistoryScanner.hasNextLine()) {
+                    String data = rideHistoryScanner.nextLine();
+                    this.addVisitorToHistory(new Visitor(data.split(",")[1], data.split(",")[3], Boolean.parseBoolean(data.split(",")[2]),data.split(",")[4]));
+                }
             }
-            rideHistoryScanner.close();
-            System.out.println("Success: Vistor history wrote to file.");
+            System.out.println("Success: Vistor history read from file.");
         } catch (IOException e) {
             System.out.println("An error has occurred.");
             e.printStackTrace();
