@@ -6,6 +6,9 @@
  * Represents an Employee, extending the Person class with additional attributes.
  */
 public class Employee extends Person {
+    private int ID;
+    private String name;
+    private String DOB;
     private String roleTitle;
     private String startDate;
     
@@ -25,9 +28,51 @@ public class Employee extends Person {
      * @param startDate The start date of the employee
      */
     public Employee(int ID, String name, String DOB, String roleTitle, String startDate) {
-        super(ID, name, DOB);
+        this.ID = ID;
+        this.name = name;
+        this.DOB = DOB;
         this.roleTitle = roleTitle;
         this.startDate = startDate;
+    }
+
+    /**
+     * Retrieves the ID of the employee.
+     *
+     * @return The ID of the employee.
+     */
+    @Override
+    public int getID() {
+        return this.ID;
+    }
+
+    /**
+     * Retrieves the name of the employee.
+     *
+     * @return The name of the employee.
+     */
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Sets the name of the employee.
+     *
+     * @param name The name to set.
+     */
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Retrieves the date of birth of the employee.
+     *
+     * @return The date of birth.
+     */
+    @Override
+    public String getDOB() {
+        return this.DOB;
     }
 
     /**
