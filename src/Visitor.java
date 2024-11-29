@@ -1,12 +1,18 @@
+
 /**
  *
  * @author mosscluney
  */
+
+import java.util.UUID;
+
 /**
- * Represents a visitor, extending the abstract Person class with additional VIP status and ticket expiry information.
+ * Represents a visitor, extending the abstract Person class with additional VIP
+ * status and ticket expiry information.
  */
 public class Visitor extends Person {
-    private int ID;
+
+    UUID ID;
     private String name;
     private String DOB;
     private boolean isVIP;
@@ -27,8 +33,7 @@ public class Visitor extends Person {
      * @param isVIP A boolean indicating if the visitor is a VIP.
      * @param ticketExpiry The expiry date of the visitor's ticket.
      */
-    public Visitor(int ID, String name, String DOB, boolean isVIP, String ticketExpiry) {
-        this.ID = ID;
+    public Visitor(String name, String DOB, boolean isVIP, String ticketExpiry) {
         this.name = name;
         this.DOB = DOB;
         this.isVIP = isVIP;
@@ -41,7 +46,7 @@ public class Visitor extends Person {
      * @return The ID of the visitor.
      */
     @Override
-    public int getID() {
+    public UUID getID() {
         return this.ID;
     }
 

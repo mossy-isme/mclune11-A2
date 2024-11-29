@@ -1,23 +1,29 @@
+
 /**
  *
  * @author mosscluney
  */
+
+import java.util.UUID;
+
 /**
- * Represents an Employee, extending the Person class with additional attributes.
+ * Represents an Employee, extending the Person class with additional
+ * attributes.
  */
 public class Employee extends Person {
-    private int ID;
+
+    UUID ID;
     private String name;
     private String DOB;
     private String roleTitle;
     private String startDate;
-    
+
     /**
      * Default constructor for the Employee class.
      */
     public Employee() {
     }
-    
+
     /**
      * Constructs an Employee object with the specified attributes.
      *
@@ -27,8 +33,7 @@ public class Employee extends Person {
      * @param roleTitle The title of the role of the employee
      * @param startDate The start date of the employee
      */
-    public Employee(int ID, String name, String DOB, String roleTitle, String startDate) {
-        this.ID = ID;
+    public Employee(String name, String DOB, String roleTitle, String startDate) {
         this.name = name;
         this.DOB = DOB;
         this.roleTitle = roleTitle;
@@ -41,7 +46,7 @@ public class Employee extends Person {
      * @return The ID of the employee.
      */
     @Override
-    public int getID() {
+    public UUID getID() {
         return this.ID;
     }
 

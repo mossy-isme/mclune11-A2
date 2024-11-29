@@ -2,11 +2,14 @@
  *
  * @author mosscluney
  */
+
+import java.util.UUID;
+
 /**
  * Represents a person with an ID, name, and date of birth.
  */
 abstract  class Person {
-    public abstract int getID();
+    public abstract UUID getID();
     
     public abstract String getName();
 
