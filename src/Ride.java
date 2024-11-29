@@ -12,8 +12,9 @@ import java.util.LinkedList;
  * Represents a ride in an amusement park.
  */
 public class Ride implements RideInterface {
+
     private int maxRider;
-    private int numOfCycles = 0;
+    int numOfCycles = 0;
     private String name;
     private Boolean isOperating;
     private Employee employeeOnShift;
@@ -37,25 +38,19 @@ public class Ride implements RideInterface {
      * @param queue The queue of visitors waiting to ride
      * @param visitorHistory The history of visitors who have ridden the ride
      */
-    public Ride(int maxRider, int numOfCycles, String name, Boolean isOperating, Employee employeeOnShift) {
+    public Ride(int maxRider, String name, Boolean isOperating, Employee employeeOnShift) {
         if (maxRider >= 1) {
-            if (numOfCycles >= 0) {
-                this.maxRider = maxRider;
-                this.numOfCycles = numOfCycles;
-                this.name = name;
-                this.isOperating = isOperating;
-                this.employeeOnShift = employeeOnShift;
-                System.err.println("Success: Ride successfully created.");
-            }
+            this.maxRider = maxRider;
+            this.name = name;
+            this.isOperating = isOperating;
+            this.employeeOnShift = employeeOnShift;
+            System.err.println("Success: Ride successfully created.");
         } else {
             System.err.println("Error: Failed to create ride, maxRider is less than 1.");
         }
     }
 
-
-
     //GETTER and SETTERS
-
     /**
      * Retrieves the maximum number of riders allowed.
      *
@@ -73,7 +68,6 @@ public class Ride implements RideInterface {
     public void setMaxRider(int maxRider) {
         this.maxRider = maxRider;
     }
-    
 
     /**
      * Returns the number of cycles.
@@ -312,8 +306,9 @@ public class Ride implements RideInterface {
     }
 
     /**
-     * Sorts the visitor history list using a custom VisitorComparator.
-     * If the visitor history list is empty or null, a message is printed and the method returns.
+     * Sorts the visitor history list using a custom VisitorComparator. If the
+     * visitor history list is empty or null, a message is printed and the
+     * method returns.
      */
     public void sortVisitorHistory() {
         if (visitorHistory == null || visitorHistory.isEmpty()) {
@@ -325,10 +320,40 @@ public class Ride implements RideInterface {
         System.out.println("Visitor history sorted successfully.");
     }
 
-
+    /**
+     * Runs one cycle of the ride, processing visitors from the queue.
+     * Checks if the ride is operating, an employee is on shift, and the queue is not empty before starting the cycle.
+     * If conditions are met, processes visitors from the queue up to the maximum rider capacity.
+     * Updates the number of cycles and logs the success message with the number of visitors processed.
+     */
     @Override
     public void runOneCycle() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+        // Check if the ride is operating or if an employee is on shift
+        if (!this.isOperating) {
+            System.out.println("Error: The ride is not currently operating. Please ensure the ride is operational before starting a cycle.");
+            return; // Exit the method to prevent further processing
+        }
+        if (this.employeeOnShift == null) {
+            System.out.println("Error: No employee is on shift to operate the ride. Assign an employee before starting a cycle.");
+            return; // Exit the method
+        }
 
+        // Check if the queue is empty
+        if (this.queue.isEmpty()) {
+            System.out.println("Error: The ride queue is empty. Add visitors to the queue before starting a cycle.");
+            return; // Exit the method
+        }
+
+        // Process the queue
+        int processedRiders = 0;
+        for (int i = 0; i < maxRider && !this.queue.isEmpty(); i++) {
+            Visitor queuedVisitor = this.queue.get(0); // Always get the first visitor
+            this.visitorHistory.add(queuedVisitor);
+            this.queue.remove(0); // Remove the first visitor
+            processedRiders++;
+        }
+
+        this.numOfCycles++;
+        System.out.println("Success: Cycle completed successfully. " + processedRiders + " visitors enjoyed the ride.");
+    }
 }
